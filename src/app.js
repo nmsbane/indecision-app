@@ -2,10 +2,14 @@ console.log("app.js is running");
 
 // JSX -Javascript XML
 // var template = React.createElement("p", null, "This is JSX from app.js");
+var app = {
+  title: "indecision app",
+  subtitle: "Subtitle"
+};
 var template = (
   <div>
-    <h1>Indecision App</h1>
-    <p>This is some info</p>
+    <h1>{app.title}</h1>
+    <p>{app.subtitle}</p>
     <ol>
       <li>Item one</li>
       <li>Item two</li>
@@ -13,15 +17,22 @@ var template = (
   </div>
 );
 
+var userName = "Awesome bane1";
+var userAge = 10;
+
+var user = {
+  name: "Aweseome bane2",
+  age: 3
+};
 var template2 = (
   <div>
-    <h1>Awesome bane</h1>
+    <h1>{user.name.toUpperCase()}</h1>
     <p>I am learning React.js and Node.js</p>
-    <p>I have to finish them before going to new job</p>
+    <p>Age: {user.age}</p>
   </div>
 );
 var appRoot = document.getElementById("app");
 
-ReactDOM.render(template2, appRoot);
+ReactDOM.render(template, appRoot);
 
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch

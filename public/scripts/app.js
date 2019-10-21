@@ -4,18 +4,22 @@ console.log("app.js is running");
 
 // JSX -Javascript XML
 // var template = React.createElement("p", null, "This is JSX from app.js");
+var app = {
+  title: "indecision app",
+  subtitle: "Subtitle"
+};
 var template = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    "Indecision App"
+    app.title
   ),
   React.createElement(
     "p",
     null,
-    "This is some info"
+    app.subtitle
   ),
   React.createElement(
     "ol",
@@ -33,13 +37,20 @@ var template = React.createElement(
   )
 );
 
+var userName = "Awesome bane1";
+var userAge = 10;
+
+var user = {
+  name: "Aweseome bane2",
+  age: 3
+};
 var template2 = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    "Awesome bane"
+    user.name.toUpperCase()
   ),
   React.createElement(
     "p",
@@ -49,11 +60,12 @@ var template2 = React.createElement(
   React.createElement(
     "p",
     null,
-    "I have to finish them before going to new job"
+    "Age: ",
+    user.age
   )
 );
 var appRoot = document.getElementById("app");
 
-ReactDOM.render(template2, appRoot);
+ReactDOM.render(template, appRoot);
 
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
