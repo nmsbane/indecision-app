@@ -2,6 +2,10 @@
 
 console.log("app.js is running");
 
+// if statements
+// ternary operator
+// logical and operator
+
 // JSX -Javascript XML
 // var template = React.createElement("p", null, "This is JSX from app.js");
 var app = {
@@ -41,31 +45,48 @@ var userName = "Awesome bane1";
 var userAge = 10;
 
 var user = {
-  name: "Aweseome bane2",
-  age: 3
+  name: "Cool dude",
+  age: 25
 };
+
+function getAge(age) {
+  if (age) {
+    return age;
+  }
+  return 25;
+}
+
+function getLocation() {
+  return React.createElement(
+    "p",
+    null,
+    "My location is hyd"
+  );
+}
+
 var template2 = React.createElement(
   "div",
   null,
   React.createElement(
     "h1",
     null,
-    user.name.toUpperCase()
+    user.name ? user.name.toUpperCase() : "some user"
   ),
   React.createElement(
     "p",
     null,
     "I am learning React.js and Node.js"
   ),
-  React.createElement(
+  user.age > 18 && React.createElement(
     "p",
     null,
     "Age: ",
-    user.age
-  )
+    getAge(user.age)
+  ),
+  getLocation()
 );
 var appRoot = document.getElementById("app");
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(template2, appRoot);
 
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
