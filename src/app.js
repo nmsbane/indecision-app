@@ -6,7 +6,7 @@ console.log("app.js is running");
 
 // JSX -Javascript XML
 // var template = React.createElement("p", null, "This is JSX from app.js");
-var app = {
+const app = {
   title: "indecision app",
   subtitle: "Subtitle"
 };
@@ -21,8 +21,8 @@ var template = (
   </div>
 );
 
-var userName = "Awesome bane1";
-var userAge = 10;
+const userName = "Awesome bane1";
+const userAge = 10;
 
 var user = {
   name: "Cool dude",
@@ -40,7 +40,7 @@ function getLocation() {
   return <p>My location is hyd</p>;
 }
 
-var template2 = (
+const template2 = (
   <div>
     <h1>{user.name ? user.name.toUpperCase() : "some user"}</h1>
     <p>I am learning React.js and Node.js</p>
