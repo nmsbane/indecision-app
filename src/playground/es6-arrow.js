@@ -22,3 +22,5 @@ const regularArrow = firstName => {
 console.log(regularArrow("Awesome bane"));
 
 const conciseArrow = firstName => firstName.split(" ")[0];
+
+console.log(conciseArrow("Cool dude"));
