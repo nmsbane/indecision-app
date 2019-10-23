@@ -1,69 +1,134 @@
 "use strict";
 
-// arguments object - no longer bound with arrow functions
-// this keyword - no longer bound
+console.log("app.js is running");
 
-var add = function add(a, b) {
-  console.log(arguments);
-  return a + b;
+// if statements
+// ternary operator
+// logical and operator
+
+// JSX -Javascript XML
+// var template = React.createElement("p", null, "This is JSX from app.js");
+var app = {
+  title: "indecision app",
+  subtitle: "Subtitle"
 };
+var template = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    app.title
+  ),
+  React.createElement(
+    "p",
+    null,
+    app.subtitle
+  ),
+  React.createElement(
+    "ol",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "Item one"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "Item two"
+    )
+  )
+);
 
-var addArrow = function addArrow(a, b) {
-  // can't access arguments using es6 arrow function
-  return a + b;
-};
-
-// console.log(add(1, 3));
+var userName = "Awesome bane1";
+var userAge = 10;
 
 var user = {
-  name: "Name first",
-  cities: ["first", "second"],
-  printPlaces: function printPlaces() {
-    // we have access to this, this is bound to user
-    console.log(this.name);
-    console.log(this.cities);
-    var that = this;
-    this.cities.forEach(function (city) {
-      console.log(that.name + city); // we get error, because this is no longer bound
-    });
-  }
+  name: "Cool dude",
+  age: 25
 };
 
-user.printPlaces();
-
-var user1 = {
-  name: "Cool",
-  cities: ["first", "second"],
-  printPlaces: function printPlaces() {
-    var _this = this;
-
-    console.log(this); // will throw error in arrow function, so use normal function
-    this.cities.forEach(function (city) {
-      console.log(_this.name + city);
-    });
-  },
-  printPlaces1: function printPlaces1() {
-    var _this2 = this;
-
-    // new method definition
-    this.cities.forEach(function (city) {
-      console.log(_this2.name + city);
-    });
+function getAge(age) {
+  if (age) {
+    return age;
   }
+  return 25;
+}
+
+function getLocation() {
+  return React.createElement(
+    "p",
+    null,
+    "My location is hyd"
+  );
+}
+
+var template2 = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    user.name ? user.name.toUpperCase() : "some user"
+  ),
+  React.createElement(
+    "p",
+    null,
+    "I am learning React.js and Node.js"
+  ),
+  user.age > 18 && React.createElement(
+    "p",
+    null,
+    "Age: ",
+    getAge(user.age)
+  ),
+  getLocation()
+);
+var appRoot = document.getElementById("app");
+
+ReactDOM.render(template2, appRoot);
+
+// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+
+var count = 0;
+var someId = "my-id";
+var addOne = function addOne() {
+  console.log("fired");
 };
-// user1.printPlaces();
-// user1.printPlaces1();
 
-var multiplier = {
-  numbers: [1, 2, 3],
-  multiplyBy: 4,
-  multiply: function multiply() {
-    var _this3 = this;
-
-    return this.numbers.map(function (number) {
-      return _this3.multiplyBy * number;
-    });
-  }
+var minusOne = function minusOne() {
+  console.log("minus one");
 };
 
-console.log(multiplier.multiply());
+var resetFunction = function resetFunction() {
+  console.log("reset counter");
+};
+
+var template3 = React.createElement(
+  "div",
+  null,
+  React.createElement(
+    "h1",
+    null,
+    "Count: ",
+    count
+  ),
+  React.createElement(
+    "button",
+    { onClick: addOne },
+    "+1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: minusOne },
+    "-1"
+  ),
+  React.createElement(
+    "button",
+    { onClick: resetFunction },
+    "Reset"
+  )
+);
+
+ReactDOM.render(template3, appRoot);

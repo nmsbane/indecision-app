@@ -53,3 +53,28 @@ var appRoot = document.getElementById("app");
 ReactDOM.render(template2, appRoot);
 
 // babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
+
+let count = 0;
+const someId = "my-id";
+const addOne = () => {
+  console.log("fired");
+};
+
+const minusOne = () => {
+  console.log("minus one");
+};
+
+const resetFunction = () => {
+  console.log("reset counter");
+};
+
+const template3 = (
+  <div>
+    <h1>Count: {count}</h1>
+    <button onClick={addOne}>+1</button>
+    <button onClick={minusOne}>-1</button>
+    <button onClick={resetFunction}>Reset</button>
+  </div>
+);
+
+ReactDOM.render(template3, appRoot);
