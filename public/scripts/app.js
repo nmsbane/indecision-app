@@ -93,42 +93,53 @@ ReactDOM.render(template2, appRoot);
 
 var count = 0;
 var someId = "my-id";
+
 var addOne = function addOne() {
+  count = count + 1;
   console.log("fired");
+  renderCounterApp();
 };
 
 var minusOne = function minusOne() {
+  count = count - 1;
   console.log("minus one");
+  renderCounterApp();
 };
 
 var resetFunction = function resetFunction() {
+  count = 0;
   console.log("reset counter");
+  renderCounterApp();
 };
 
-var template3 = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
+var renderCounterApp = function renderCounterApp() {
+  var template3 = React.createElement(
+    "div",
     null,
-    "Count: ",
-    count
-  ),
-  React.createElement(
-    "button",
-    { onClick: addOne },
-    "+1"
-  ),
-  React.createElement(
-    "button",
-    { onClick: minusOne },
-    "-1"
-  ),
-  React.createElement(
-    "button",
-    { onClick: resetFunction },
-    "Reset"
-  )
-);
+    React.createElement(
+      "h1",
+      null,
+      "Count: ",
+      count
+    ),
+    React.createElement(
+      "button",
+      { onClick: addOne },
+      "+1"
+    ),
+    React.createElement(
+      "button",
+      { onClick: minusOne },
+      "-1"
+    ),
+    React.createElement(
+      "button",
+      { onClick: resetFunction },
+      "Reset"
+    )
+  );
 
-ReactDOM.render(template3, appRoot);
+  ReactDOM.render(template3, appRoot);
+};
+
+renderCounterApp();
