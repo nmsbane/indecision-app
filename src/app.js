@@ -32,6 +32,9 @@ const removeOptions = () => {
   render();
 };
 
+const numbers = [1, 3, 2, 4, 5];
+// only array of jsx elements need to have key prop
+
 const render = () => {
   const template = (
     <div>
@@ -40,8 +43,9 @@ const render = () => {
       <p>{app.options.length}</p>
       <button onClick={removeOptions}>Remove All</button>
       <ol>
-        <li>Item one</li>
-        <li>Item two</li>
+        {app.options.map(option => (
+          <li key={option}>{option}</li>
+        ))}
       </ol>
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" />

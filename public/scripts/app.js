@@ -34,6 +34,9 @@ var removeOptions = function removeOptions() {
   render();
 };
 
+var numbers = [1, 3, 2, 4, 5];
+// only array of jsx elements need to have key prop
+
 var render = function render() {
   var template = React.createElement(
     "div",
@@ -61,16 +64,13 @@ var render = function render() {
     React.createElement(
       "ol",
       null,
-      React.createElement(
-        "li",
-        null,
-        "Item one"
-      ),
-      React.createElement(
-        "li",
-        null,
-        "Item two"
-      )
+      app.options.map(function (option) {
+        return React.createElement(
+          "li",
+          { key: option },
+          option
+        );
+      })
     ),
     React.createElement(
       "form",
