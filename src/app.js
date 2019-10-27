@@ -35,13 +35,23 @@ const removeOptions = () => {
 const numbers = [1, 3, 2, 4, 5];
 // only array of jsx elements need to have key prop
 
+const onMakeDecision = e => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  alert(option);
+  console.log(randomNum);
+};
+
 const render = () => {
   const template = (
     <div>
       <h1>{app.title}</h1>
       <p>{app.subtitle}</p>
-      <p>{app.options.length}</p>
+      <p>{app.options.length > 0 ? "Here are your options" : "no options"}</p>
       <button onClick={removeOptions}>Remove All</button>
+      <button disabled={app.options.length == 0} onClick={onMakeDecision}>
+        What should i do?
+      </button>
       <ol>
         {app.options.map(option => (
           <li key={option}>{option}</li>
