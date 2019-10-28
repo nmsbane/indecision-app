@@ -41,6 +41,7 @@ class Traveller extends Person {
 
   getGreeting() {
     if (!!this.homeLocation) {
+      // resolves to true or false this.homeLocation
       return `${super.getGreeting()} visiting from ${this.homeLocation}`;
     }
     return super.getGreeting();
