@@ -12,10 +12,18 @@ class Header extends React.Component {
 // react differentiates between normal html and react component using uppercase letter
 
 class Action extends React.Component {
+  /*
+    in Action component, this points to instance of Action Component
+    so, this.handlePick is a method inside the class itself
+  */
+  handlePick() {
+    alert("handle pick");
+  }
+
   render() {
     return (
       <div>
-        <button>What should i do?</button>
+        <button onClick={this.handlePick}>What should i do?</button>
       </div>
     );
   }
@@ -32,9 +40,14 @@ class Option extends React.Component {
 }
 
 class Options extends React.Component {
+  handleRemoveAll() {
+    alert("handle remove all button clicked");
+  }
+
   render() {
     return (
       <div>
+        <button onClick={this.handleRemoveAll}>Remove All</button>
         {this.props.options.map(option => {
           return <Option key={option} optionText={option} />;
         })}
@@ -44,10 +57,21 @@ class Options extends React.Component {
 }
 
 class AddOption extends React.Component {
+  handleAddOption(e) {
+    e.preventDefault();
+    const option = e.target.elements.option.value.trim();
+    if (option) {
+      alert(option);
+    }
+  }
+
   render() {
     return (
       <div>
-        <p>Add option component goes here</p>
+        <form onSubmit={this.handleAddOption}>
+          <input type="text" name="option" />
+          <button>Add Option</button>
+        </form>
       </div>
     );
   }

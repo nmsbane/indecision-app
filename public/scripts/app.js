@@ -52,6 +52,16 @@ var Action = function (_React$Component2) {
   }
 
   _createClass(Action, [{
+    key: "handlePick",
+
+    /*
+      in Action component, this points to instance of Action Component
+      so, this.handlePick is a method inside the class itself
+    */
+    value: function handlePick() {
+      alert("handle pick");
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -59,7 +69,7 @@ var Action = function (_React$Component2) {
         null,
         React.createElement(
           "button",
-          null,
+          { onClick: this.handlePick },
           "What should i do?"
         )
       );
@@ -106,11 +116,21 @@ var Options = function (_React$Component4) {
   }
 
   _createClass(Options, [{
+    key: "handleRemoveAll",
+    value: function handleRemoveAll() {
+      alert("handle remove all button clicked");
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
+        React.createElement(
+          "button",
+          { onClick: this.handleRemoveAll },
+          "Remove All"
+        ),
         this.props.options.map(function (option) {
           return React.createElement(Option, { key: option, optionText: option });
         })
@@ -131,15 +151,29 @@ var AddOption = function (_React$Component5) {
   }
 
   _createClass(AddOption, [{
+    key: "handleAddOption",
+    value: function handleAddOption(e) {
+      e.preventDefault();
+      var option = e.target.elements.option.value.trim();
+      if (option) {
+        alert(option);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
         React.createElement(
-          "p",
-          null,
-          "Add option component goes here"
+          "form",
+          { onSubmit: this.handleAddOption },
+          React.createElement("input", { type: "text", name: "option" }),
+          React.createElement(
+            "button",
+            null,
+            "Add Option"
+          )
         )
       );
     }
