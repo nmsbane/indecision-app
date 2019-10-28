@@ -1,3 +1,16 @@
+// const obj = {
+//   name: "seattle",
+//   getName() {
+//     return this.name;
+//   }
+// };
+
+// // for regular functions, `this` is undefined
+
+// const getName = obj.getName.bind(obj);
+
+// console.log(getName());
+
 class Header extends React.Component {
   render() {
     return (
@@ -40,8 +53,14 @@ class Option extends React.Component {
 }
 
 class Options extends React.Component {
+  // for handling this binding for handler events
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
+
   handleRemoveAll() {
-    alert("handle remove all button clicked");
+    console.log(this.props.options);
   }
 
   render() {
