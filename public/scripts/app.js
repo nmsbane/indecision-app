@@ -19,23 +19,40 @@ var Counter = function (_React$Component) {
     _this.addOne = _this.addOne.bind(_this);
     _this.minusOne = _this.minusOne.bind(_this);
     _this.resetFunction = _this.resetFunction.bind(_this);
+    _this.state = {
+      count: 0
+    };
     return _this;
   }
 
   _createClass(Counter, [{
     key: "addOne",
-    value: function addOne() {
-      console.log("addOne");
+    value: function addOne(e) {
+      // setState takes only one argument, we are passing a function
+      // from there we want to return an object
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count + 1 // we are not overriding state completely, we are just updating the specific value
+        };
+      });
     }
   }, {
     key: "minusOne",
-    value: function minusOne() {
-      console.log("minusOne");
+    value: function minusOne(e) {
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count - 1
+        };
+      });
     }
   }, {
     key: "resetFunction",
-    value: function resetFunction() {
-      console.log("resetFunction");
+    value: function resetFunction(e) {
+      this.setState(function () {
+        return {
+          count: 0
+        };
+      });
     }
   }, {
     key: "render",
@@ -46,7 +63,8 @@ var Counter = function (_React$Component) {
         React.createElement(
           "h1",
           null,
-          "Count: "
+          "Count: ",
+          this.state.count
         ),
         React.createElement(
           "button",
