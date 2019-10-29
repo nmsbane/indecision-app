@@ -28,11 +28,15 @@ class Counter extends React.Component {
   }
 
   resetFunction(e) {
+    // this.setState is asynchronus
     this.setState(() => {
       return {
         count: 0
       };
     });
+    // this.setState({
+    //   count: 0
+    // });
   }
 
   render() {
