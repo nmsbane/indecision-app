@@ -33,7 +33,7 @@ var Header = function Header(props) {
       null,
       props.title
     ),
-    React.createElement(
+    props.subtitle && React.createElement(
       "h2",
       null,
       props.subtitle
@@ -41,6 +41,9 @@ var Header = function Header(props) {
   );
 };
 
+Header.defaultProps = {
+  title: "Indecision App"
+};
 // react differentiates between normal html and react component using uppercase letter
 
 var Action = function Action(props) {
@@ -104,6 +107,7 @@ var AddOption = function (_React$Component) {
       var option = e.target.elements.option.value.trim();
       // alert(option);
       var error = this.props.handleAddOption(option);
+      e.target.elements.option.value = "";
 
       this.setState(function () {
         return {
@@ -148,7 +152,7 @@ var IndecisionApp = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
     _this2.state = {
-      options: []
+      options: props.options
     };
     _this2.handleDeleteOptions = _this2.handleDeleteOptions.bind(_this2);
     _this2.handlePick = _this2.handlePick.bind(_this2);
@@ -197,13 +201,12 @@ var IndecisionApp = function (_React$Component2) {
   }, {
     key: "render",
     value: function render() {
-      var title = "Indecision Application";
       var subtitle = "Put your life in the hands of the computer";
 
       return React.createElement(
         "div",
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
+        React.createElement(Header, { subtitle: subtitle }),
         React.createElement(Action, {
           hasOptions: this.state.options.length > 0,
           handlePick: this.handlePick
@@ -220,6 +223,9 @@ var IndecisionApp = function (_React$Component2) {
   return IndecisionApp;
 }(React.Component);
 
+IndecisionApp.defaultProps = {
+  options: []
+};
 // const User = props => {
 //   return (
 //     <div>
