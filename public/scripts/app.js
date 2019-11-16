@@ -62,10 +62,15 @@ var Option = function Option(props) {
   return React.createElement(
     "div",
     null,
+    props.optionText,
     React.createElement(
-      "p",
-      null,
-      props.optionText
+      "button",
+      {
+        onClick: function onClick(e) {
+          props.handleDeleteOption(props.optionText);
+        }
+      },
+      "Remove"
     )
   );
 };
@@ -80,7 +85,11 @@ var Options = function Options(props) {
       "Remove All"
     ),
     props.options.map(function (option) {
-      return React.createElement(Option, { key: option, optionText: option });
+      return React.createElement(Option, {
+        key: option,
+        optionText: option,
+        handleDeleteOption: props.handleDeleteOption
+      });
     })
   );
 };
@@ -157,6 +166,7 @@ var IndecisionApp = function (_React$Component2) {
     _this2.handleDeleteOptions = _this2.handleDeleteOptions.bind(_this2);
     _this2.handlePick = _this2.handlePick.bind(_this2);
     _this2.handleAddOption = _this2.handleAddOption.bind(_this2);
+    _this2.handleDeleteOption = _this2.handleDeleteOption.bind(_this2);
     return _this2;
   }
 
@@ -199,6 +209,17 @@ var IndecisionApp = function (_React$Component2) {
       });
     }
   }, {
+    key: "handleDeleteOption",
+    value: function handleDeleteOption(optionToRemove) {
+      this.setState(function (prevstate) {
+        return {
+          options: prevstate.options.filter(function (option) {
+            return optionToRemove !== option;
+          })
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var subtitle = "Put your life in the hands of the computer";
@@ -213,7 +234,8 @@ var IndecisionApp = function (_React$Component2) {
         }),
         React.createElement(Options, {
           options: this.state.options,
-          handleDeleteOptions: this.handleDeleteOptions
+          handleDeleteOptions: this.handleDeleteOptions,
+          handleDeleteOption: this.handleDeleteOption
         }),
         React.createElement(AddOption, { handleAddOption: this.handleAddOption })
       );
