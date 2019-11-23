@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const template = <p>Testing 123</p>;
+import IndecisionApp from "./components/IndecisionApp";
 
-ReactDOM.render(template, document.getElementById("app"));
+// react differentiates between normal html and react component using uppercase letter
+
+ReactDOM.render(<IndecisionApp />, document.getElementById("app"));

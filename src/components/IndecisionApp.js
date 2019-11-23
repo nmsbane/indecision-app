@@ -1,0 +1,110 @@
+import React from "react";
+
+import AddOption from "./AddOption";
+import Header from "./Header";
+import Action from "./Action";
+import Options from "./Options";
+
+class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: []
+    };
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
+  }
+
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem("options");
+      const options = JSON.parse(json);
+      if (options) {
+        this.setState(() => {
+          return {
+            options
+          };
+        });
+      }
+    } catch (e) {
+      // Do nothing at all,
+      // Will fire when parsing JSON data it raises error
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem("options", json);
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("component will unmount");
+  }
+
+  // handleDeleteOptions
+  handleDeleteOptions() {
+    this.setState(() => {
+      return {
+        options: []
+      };
+    });
+  }
+
+  // handlePick
+  handlePick() {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+  }
+
+  handleAddOption(option) {
+    if (!option) {
+      return "Enter valid value";
+    } else if (this.state.options.indexOf(option) > -1) {
+      // we found the match
+      return "This option already exists";
+    }
+
+    this.setState(prevstate => {
+      return {
+        options: [...prevstate.options, option]
+      };
+    });
+  }
+
+  handleDeleteOption(optionToRemove) {
+    this.setState(prevstate => {
+      return {
+        options: prevstate.options.filter(option => {
+          return optionToRemove !== option;
+        })
+      };
+    });
+  }
+
+  render() {
+    const subtitle = "Put your life in the hands of the computer";
+
+    return (
+      <div>
+        <Header subtitle={subtitle} />
+        <Action
+          hasOptions={this.state.options.length > 0}
+          handlePick={this.handlePick}
+        />
+        <Options
+          options={this.state.options}
+          handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
+        />
+        <AddOption handleAddOption={this.handleAddOption} />
+      </div>
+    );
+  }
+}
+
+export default IndecisionApp;
