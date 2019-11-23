@@ -6,16 +6,50 @@ import Action from "./Action";
 import Options from "./Options";
 
 class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: []
-    };
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-  }
+  state = {
+    options: []
+  };
+
+  // handleDeleteOptions
+  handleDeleteOptions = () => {
+    this.setState(() => {
+      return {
+        options: []
+      };
+    });
+  };
+
+  // handlePick
+  handlePick = () => {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+  };
+
+  handleAddOption = option => {
+    if (!option) {
+      return "Enter valid value";
+    } else if (this.state.options.indexOf(option) > -1) {
+      // we found the match
+      return "This option already exists";
+    }
+
+    this.setState(prevstate => {
+      return {
+        options: [...prevstate.options, option]
+      };
+    });
+  };
+
+  handleDeleteOption = optionToRemove => {
+    this.setState(prevstate => {
+      return {
+        options: prevstate.options.filter(option => {
+          return optionToRemove !== option;
+        })
+      };
+    });
+  };
 
   componentDidMount() {
     try {
@@ -43,47 +77,6 @@ class IndecisionApp extends React.Component {
 
   componentWillUnmount() {
     console.log("component will unmount");
-  }
-
-  // handleDeleteOptions
-  handleDeleteOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      };
-    });
-  }
-
-  // handlePick
-  handlePick() {
-    const randomNum = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomNum];
-    alert(option);
-  }
-
-  handleAddOption(option) {
-    if (!option) {
-      return "Enter valid value";
-    } else if (this.state.options.indexOf(option) > -1) {
-      // we found the match
-      return "This option already exists";
-    }
-
-    this.setState(prevstate => {
-      return {
-        options: [...prevstate.options, option]
-      };
-    });
-  }
-
-  handleDeleteOption(optionToRemove) {
-    this.setState(prevstate => {
-      return {
-        options: prevstate.options.filter(option => {
-          return optionToRemove !== option;
-        })
-      };
-    });
   }
 
   render() {
