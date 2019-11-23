@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import IndecisionApp from "./components/IndecisionApp";
-import { INSPECT_MAX_BYTES } from "buffer";
+import "./styles/styles.scss";
 
 // react differentiates between normal html and react component using uppercase letter
 
